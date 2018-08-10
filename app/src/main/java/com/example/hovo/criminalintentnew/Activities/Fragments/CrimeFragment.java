@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 
-import com.example.hovo.criminalintentnew.Activities.CrimePagerActivity;
+
 import com.example.hovo.criminalintentnew.Activities.Model.CrimeLab;
 import com.example.hovo.criminalintentnew.R;
 
@@ -27,7 +27,6 @@ import com.example.hovo.criminalintentnew.Activities.Model.Crime;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
