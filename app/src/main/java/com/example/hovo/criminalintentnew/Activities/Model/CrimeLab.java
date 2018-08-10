@@ -27,6 +27,12 @@ public class CrimeLab {
         return mCrimes;
     }
 
+    public void removeItem(Crime crime){
+        if(mCrimes.contains(crime)) {
+            mCrimes.remove(crime);
+        }
+    }
+
     public Crime getCrime(UUID id){
         for (Crime crime: mCrimes
              ) {

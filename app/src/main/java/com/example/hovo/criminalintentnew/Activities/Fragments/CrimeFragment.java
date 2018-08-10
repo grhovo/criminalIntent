@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 
+import com.example.hovo.criminalintentnew.Activities.CrimePagerActivity;
 import com.example.hovo.criminalintentnew.Activities.Model.CrimeLab;
 import com.example.hovo.criminalintentnew.R;
 
@@ -25,6 +27,7 @@ import com.example.hovo.criminalintentnew.Activities.Model.Crime;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
@@ -35,6 +38,8 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mCheckBox;
     private Button mTimeButton;
+    private ImageButton mDelete;
+
 
     private static final String DIALOG_DATE = "Dialog Date";
     private static final String ARG_CRIME_ID = "crime id";
@@ -121,6 +126,14 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        mDelete = v.findViewById(R.id.delete_crime);
+        mDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrimeLab.getInstance(getActivity()).removeItem(mCrime);
+                getActivity().finish();
+            }
+        });
 
         return v;
     }
