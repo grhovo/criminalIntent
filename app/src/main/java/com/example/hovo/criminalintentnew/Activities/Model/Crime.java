@@ -41,11 +41,14 @@ public class Crime {
     }
 
     public Crime(){
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+
+    }
+    public Crime(UUID id){
+        mId = id;
         mDate = new Date();
         hour = 0;
         minute = 0;
-
     }
 
     public UUID getId() {

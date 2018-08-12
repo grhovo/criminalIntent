@@ -33,7 +33,6 @@ import java.util.UUID;
 public class CrimeListFragment extends Fragment {
     private RecyclerView rv;
     private CrimeAdapter mAdapter;
-    private UUID changedItemId;
     private boolean mSubtitleVisible;
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
@@ -50,7 +49,7 @@ public class CrimeListFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == REQUEST_CODE_FOR_LIST) {
-                changedItemId = (UUID) data.getSerializableExtra(CrimeFragment.RESULT_ID);
+               return;
             }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -87,15 +86,8 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             rv.setAdapter(mAdapter);
         }else {
-            int channgedItem = 0;
-            for (Crime crime:
-                 crimes) {
-                if(crime.getId() == changedItemId){
-                    channgedItem = crimes.indexOf(crime);
-                    break;
-                }
-            }
-            mAdapter.notifyItemChanged(channgedItem);
+            mAdapter.setCrimes(crimes);
+            mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
     }
@@ -204,5 +196,8 @@ public class CrimeListFragment extends Fragment {
             return mCrimes.size();
         }
 
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
+        }
     }
 }
