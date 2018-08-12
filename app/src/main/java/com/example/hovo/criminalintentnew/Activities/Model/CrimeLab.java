@@ -29,6 +29,7 @@ public class CrimeLab {
 
     public void removeItem(Crime crime){
         if(mCrimes.contains(crime)) {
+
             mCrimes.remove(crime);
         }
     }
