@@ -11,17 +11,16 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
-    private boolean mRequiredPolice;
+    private String mSuspect;
     private int hour;
     private int minute;
 
-
-    public boolean isRequiredPolice() {
-        return mRequiredPolice;
+    public String getSuspect() {
+        return mSuspect;
     }
 
-    public void setRequiredPolice(boolean requiredPolice) {
-        mRequiredPolice = requiredPolice;
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 
     public int getHour() {

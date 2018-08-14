@@ -41,7 +41,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <CheckBox
@@ -60,5 +60,17 @@
             android:contentDescription="@string/delete_element"
             app:srcCompat="@drawable/ic_crime_delete" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/crime_suspect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_suspect_text" />
+
+    <Button
+        android:id="@+id/crime_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_report_text" />
 
 </LinearLayout>
