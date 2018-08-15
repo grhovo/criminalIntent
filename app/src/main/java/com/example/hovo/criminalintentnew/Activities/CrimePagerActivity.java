@@ -19,7 +19,8 @@ import com.example.hovo.criminalintentnew.R;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity
+implements CrimeFragment.CallBacks{
     private static final String EXTRA_CRIME_ID = "CRIME ID";
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
@@ -57,5 +58,10 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onCrimeUpdated(Crime crime) {
+
     }
 }

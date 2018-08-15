@@ -1,6 +1,7 @@
 package com.example.hovo.criminalintentnew.Activities.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -43,6 +44,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
+
 public class CrimeFragment extends Fragment {
 
 
@@ -57,6 +60,7 @@ public class CrimeFragment extends Fragment {
     private ImageButton mCameraButton;
     private ImageView mPhoto;
     private File mPhotoFile;
+    private CallBacks mCallBacks;
 
 
     private static final String DIALOG_DATE = "Dialog Date";
@@ -68,6 +72,9 @@ public class CrimeFragment extends Fragment {
     private static final int REQUEST_CONTACT = 2;
     private static final int REQUEST_PHOTO = 3;
 
+    public interface CallBacks{
+        void onCrimeUpdated(Crime crime);
+    }
 
     public static CrimeFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -76,6 +83,23 @@ public class CrimeFragment extends Fragment {
         CrimeFragment fragment = new CrimeFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallBacks = (CallBacks) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallBacks = null;
+    }
+
+    private void updateCrime(){
+        CrimeLab.getInstance(getActivity()).updateCrime(mCrime);
+        mCallBacks.onCrimeUpdated(mCrime);
     }
 
     @Override
@@ -108,6 +132,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mCrime.setTitle(s.toString());
+                updateCrime();
             }
 
             @Override
@@ -150,6 +175,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mCrime.setSolved(isChecked);
+                updateCrime();
             }
         });
 
@@ -277,6 +303,7 @@ public class CrimeFragment extends Fragment {
             mCrime.setDate(date);
             String date1 = DateFormat.getDateInstance(DateFormat.FULL).format(date);
             updateDate(date1);
+            updateCrime();
         }
         else if(requestCode == REQUEST_TIME){
             int hour = data.getIntExtra(TimePickerFragment.HOUR,mCrime.getHour());
@@ -284,6 +311,7 @@ public class CrimeFragment extends Fragment {
             mCrime.setHour(hour);
             mCrime.setMinute(minute);
             updateTime(hour,minute);
+            updateCrime();
 
         }else if(requestCode == REQUEST_CONTACT && data != null){
             Uri contactUri = data.getData();
@@ -292,6 +320,8 @@ public class CrimeFragment extends Fragment {
             String[] queryFields = new String[]{
                     ContactsContract.Contacts.DISPLAY_NAME
             };
+
+
             // Выполнение запроса - contactUri здесь выполняет функции
             // условия "where"
             Cursor c = getActivity().getContentResolver()
@@ -305,7 +335,7 @@ public class CrimeFragment extends Fragment {
                 c.moveToFirst();
                 String suspect = c.getString(0);
                 mCrime.setSuspect(suspect);
-                Log.i("suspect",mCrime.getSuspect());
+                updateCrime();
                 mSuspectButton.setText(suspect);
             }finally {
                 c.close();
@@ -314,6 +344,7 @@ public class CrimeFragment extends Fragment {
             Uri uri = FileProvider.getUriForFile(getActivity(),
                     "com.example.hovo.criminalintentnew.fileprovider",mPhotoFile);
             getActivity().revokeUriPermission(uri,Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            updateCrime();
             updatePhotoView();
         }
 
