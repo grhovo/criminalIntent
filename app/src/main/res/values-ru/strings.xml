@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">CriminalIntent</string>
+    <string name="crime_title_label">Название</string>
+    <string name="crime_details_label">Детали</string>
+    <string name="crime_solved_label">Решена</string>
+    <string name="date_picker_title">Дата преступления</string>
+    <string name="new_crime">Новое преступление</string>
+    <string name="show_subtitle">Показать заголовок</string>
+    <string name="hide_subtitle">Убрать заголовок</string>
+    <plurals name="subtitle_plural" tools:ignore="MissingQuantity">
+        <item quantity="one">%1$d преступление</item>
+        <item quantity="other">%1$d преступлений</item>
+    </plurals>
+    <string name="crime_suspect_text">Выбрать подозреваемого</string>
+    <string name="crime_report_text">Отправить отчет по преступлению</string>
+    <string name="crime_report">"%1$s!   Преступление раскрыто в%2$s. %3$s, y %4$s     "</string>
+    <string name="delete_element">Удалить</string>
+    <string name="crime_report_solved">Дело раскрыто</string>
+    <string name="crime_report_unsolved">Дело не раскрыто</string>
+    <string name="crime_report_no_suspect">Нет подозреваемого</string>
+    <string name="crime_report_suspect">подозреваемый %s.</string>
+    <string name="crime_report_subject">CriminalIntent отчет по преступлению</string>
+    <string name="send_report">"Отправить отчет через "</string>
+    <string name="crime_title_hint">Введите название</string>
+</resources>
