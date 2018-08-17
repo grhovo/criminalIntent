@@ -1,9 +1,7 @@
 package com.example.hovo.criminalintentnew.Activities.Model;
 
-import java.sql.Time;
-import java.text.DateFormat;
+
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.UUID;
 
 public class Crime {

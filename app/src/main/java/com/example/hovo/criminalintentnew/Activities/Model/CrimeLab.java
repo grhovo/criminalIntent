@@ -43,15 +43,12 @@ public class CrimeLab {
     public List<Crime> getCrimes() {
         List<Crime> crimes = new ArrayList<>();
 
-        CrimeCursorWrapper cursorWrapper = queryCrimes(null,null);
-        try {
+        try (CrimeCursorWrapper cursorWrapper = queryCrimes(null, null)) {
             cursorWrapper.moveToFirst();
-            while (!cursorWrapper.isAfterLast()){
+            while (!cursorWrapper.isAfterLast()) {
                 crimes.add(cursorWrapper.getCrime());
                 cursorWrapper.moveToNext();
             }
-        }finally {
-            cursorWrapper.close();
         }
         return crimes;
     }

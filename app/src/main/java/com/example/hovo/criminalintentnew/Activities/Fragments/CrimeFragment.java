@@ -19,7 +19,6 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -250,9 +249,11 @@ public class CrimeFragment extends Fragment {
     private void updatePhotoView(){
         if(mPhotoFile==null||!mPhotoFile.exists()){
             mPhoto.setImageDrawable(null);
+            mPhoto.setContentDescription(getString(R.string.crime_photo_no_image_description));
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(),getActivity());
             mPhoto.setImageBitmap(bitmap);
+            mPhoto.setContentDescription(getString(R.string.crime_photo_image_description));
         }
     }
 
